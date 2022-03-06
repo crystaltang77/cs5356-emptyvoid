@@ -1,4 +1,4 @@
-# Milestone 1 Project: Ruffhouse
+# CS5356 Project: Empty Void
 
 Refer to the assignment for most of the details of the project
 

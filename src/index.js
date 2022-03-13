@@ -52,6 +52,11 @@ app.get("/dashboard", authMiddleware, async function (req, res) {
   res.render("pages/dashboard", { user: req.user, feed });
 });
 
+app.get("/profile", authMiddleware, async function (req, res) {
+  const feed = await userFeed.get();
+  res.render("pages/profile", { user: req.user, feed });
+});
+
 app.post("/sessionLogin", async (req, res) => {
   // CS5356 TODO #4
   // Get the ID token from the request body

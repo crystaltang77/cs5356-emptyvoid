@@ -1,176 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Page</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+  <%- include('../partials/head') %>
+    <!-- Include any custom css classes that you want available on this page here -->
+    <style>
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      list-style-type: none;
-      font-family: 'Roboto', sans-serif;
-    }
-    .wrapper {
-      display: grid;
-      grid-template-columns: 20rem 1fr;
-      position: relative;
-    }
-
-    .side-nav-wrapper {
-      position: fixed;
-      width: 20rem;
-      background-color: lightblue;
-      height: 100vh;
-    }
-    
-    .logo {
-      padding: 2rem;
-    }
-
-    .side-nav ul {
-      display: flex;
-      flex-direction: column;
-      width: 50%;
-      margin: auto;
-      font-size: 1.2rem;
-      font-weight: bold;
-      line-height: 3rem;
-    }
-
-    .main-section {
-      width: 60%;
-      margin: 5rem auto;
-      color: grey;
-    }
-
-    .main-h2 {
-      font-size: 1rem;
-      margin: 1.5rem 5rem;
-    }
-
-    .post-section {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      justify-content: space-between;
-    }
-
-    .post-section ul {
-      display: flex;
-      margin: 2rem 5rem;
-      align-items: center;
-    }
-    
-    .post-section ul li {
-      margin-right: 1rem;
-    }
-
-    .post-section ul img {
-      width: 1.5rem;
-    }
-
-    .post-btn {
-      border: none;
-      padding: 0.7rem 1.7rem;
-      border-radius: 5rem;
-      background-color: rgba(74, 171, 236, 0.555);
-      color: white;
-    }
-
-    .main-content div {
-      margin: 2rem 5rem;
-    }
-
-    .main-content h2 {
-      font-size: 1rem;
-      margin: 1rem 0rem;
-    }
-
-    .main-content img {
-      height: 20rem;
-      border-radius: 10px;
-    }
-
-    .article h2 {
-      margin: 4rem 0rem 0rem 0rem;
-    }
-    
-  </style>
+    </style>
 </head>
+
 <body>
-  <section class="wrapper">
-    <!-- Side Nav  -->
-    <div class="side-nav">
-      <div class="side-nav-wrapper">
-        <h1 class="logo">LOGO</h1>
-        <ul>
-          <li>Home</li>
-          <li>Profile</li>
-          <li>Private Posts</li>
-        </ul>
+  <header>
+    <%- include('../partials/nav') %>
+
+  </header>
+
+  <!-- Fill me in! -->
+  <!-- CS5356 TODO #1 Add your landing page here -->
+  <section class="hero is-primary">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title is-1">Empty Void</h1>
+        <h2 class="subtitle">A personal abyss for your thoughts</h2>
       </div>
     </div>
-    <!-- End of Side Nav -->
-    <!-- Main Section -->
-    <div class="main-section">
-      <div>
-        <hr>
-        <h2 class="main-h2">Rant Away</h2>
-      </div>
-      <div class="post-section">
-        <ul>
-          <li><img src="../../../static/img-icon.png"></li>
-          <li><img src="../../../static/gif-icon.png"></li>
-          <!-- <li><img src="../../../static/img-icon.png"></li> -->
-          <li><img src="../../../static/smile-icon.png"></li>
-        </ul>
-        <ul>
-          <li><img src="../../../static/circle-icon.png" alt="circle icon"></li>
-          <li>|</li>
-          <li><img src="../../../static/plus-icon.png" alt="add icon"></li>
-          <li><button class="post-btn">POST</button></li>
-        </ul>
-      </div>
-      <hr style="padding: 0.3rem; background-color: rgba(211, 211, 211, 0.534); border: none;">
-      <!-- Main Content: Title, Image, Articles -->
-      <div class="main-content">
-        <div>
-          <h2>Today is another long day. Look at this picture!</h2>
-          <img src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="dog image">
-        </div>
-
-        <!-- Articles Section -->
-        <hr style="width: 80%">
-        <div class="article">
-          <h2>Sometimes blah blah blah</h2>
-        </div>
-        <hr style="width: 80%">
-        <div class="article">
-          <h2>Sometimes blah blah blah</h2>
-        </div>
-        <hr style="width: 80%">
-        <div class="article">
-          <h2>Sometimes blah blah blah</h2>
-        </div>
-        <hr style="width: 80%">
-        <div class="article">
-          <h2>Sometimes blah blah blah</h2>
-        </div>
-        <hr style="width: 80%">
-        <div class="article">
-          <h2>Sometimes blah blah blah</h2>
-        </div>
-        <!-- End of Articles Section -->
-
-      </div>
-      <!-- End of Main Content -->
-
-    </div>
-    <!-- End of main section -->
   </section>
+
+  <section>
+    <div style="padding: 10px; border: 1px solid lightgray; margin: 10px; text-align:center">
+      <h2 class="title">The Problem</h2>
+      <p>Want to scream and shout and let it all out, but no one has ears to lend at the moment? Throw it all into the void.</p>
+    </div>
+  </section>
+
+  <section class="hero">
+    <div style="padding: 10px; border: 1px solid lightgray; margin: 10px; text-align:center">
+      <h2 class="title">The Solution</h2>
+      <p>A web app that allows you to rant about whatever is on your mind.</p>
+    </div>
+  </section>
+
+  <section>
+    <div style="padding: 10px; border: 1px solid lightgray; margin: 10px; text-align:center">
+      <h2 class="title">Feature Set</h2>
+      <div class="columns">
+        <div class="column">
+          <div class="card-content">
+            <h2 class="subtitle"><strong>Post Your Public or Private Thoughts.</strong></h2>
+            <p>Trivial thoughts? No such thing. Throw it into the void for the world to see or to disappear forever.</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card-content">
+            <h2 class="subtitle"><strong>See What's On Others' Minds.</strong></h2>
+            <p>Use the public postings feed to see the sufferings of the Empty Void community.</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card-content">
+            <h2 class="subtitle"><strong>Exclusive Access to the Community.</strong></h2>
+            <p>Be part of the elite group of Empty Voiders. It's free and therapeutic!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div style="padding: 10px; border: 1px solid lightgray; margin: 10px; text-align:center">
+      <h2 class="title">New User?</h2>
+      <!-- <p>Sign Up Here!</p> -->
+      <a href="/sign-up" class="button is-primary">Sign Up</a>
+    </div>
+  </section>
+
+
 </body>
+
+<%- include('../partials/footer') %>
+
 </html>

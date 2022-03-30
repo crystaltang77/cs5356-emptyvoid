@@ -38,9 +38,9 @@ app.use("/static", express.static("static/"));
 // index page
 
 // Home Page
-app.get('/homepage', (req, res) => {
-  res.render('pages/homepage')
-})
+// app.get('/homepage', (req, res) => {
+//   res.render('pages/homepage')
+// })
 
 app.get("/", function (req, res) {
   res.render("pages/index");

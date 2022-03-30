@@ -80,7 +80,7 @@ app.post("/sessionLogin", async (req, res) => {
     .then(
       session => {
         const options = { maxAge: expiresIn, httpOnly: true };
-        res.cookie("session", session, options);
+        res.cookie("__session", session, options);
         res.status(200).send(JSON.stringify({ status: "success" }));
       },
       error => {

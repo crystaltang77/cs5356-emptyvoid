@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const admin = require("firebase-admin");
 const app = express();
 const port = process.env.PORT || 8080;
+const functions = require("firebase-functions")
 
 // CS5356 TODO #2
 // Uncomment this next line after you've created
@@ -106,5 +107,6 @@ app.post("/dog-messages", authMiddleware, async (req, res) => {
   res.redirect('/dashboard')
 });
 
-app.listen(port);
+// app.listen(port);
+exports.app = functions.https.onRequest(app);
 console.log("Server started at http://localhost:" + port);

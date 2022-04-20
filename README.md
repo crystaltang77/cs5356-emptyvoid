@@ -7,6 +7,7 @@ Refer to the assignment for most of the details of the project
 * Run  `npm install` to install all the project dependencies
 * Run `npm run start` to start the server
 * Visit http://localhost:8080 in your browser to see the web application
+* After firebase setup, use `npx firebase emulators:start`
 
 ## Development
 

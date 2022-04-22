@@ -91,17 +91,18 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ idToken })
               }).then(() => {
-                db.collection("users").add({
-                  email: email, // TODO: how to get email, help
-                  username: uid
-                })
-                .then((docRef) => {
-                    console.log("Document written with ID: ", docRef.id);
-                    window.location.href = '/dashboard'
-                })
-                .catch((error) => {
-                    console.error("Error adding document: ", error);
-                });
+                window.location.href = '/dashboard'
+                // db.collection("users").add({
+                //   email: email, 
+                //   username: uid
+                // })
+                // .then((docRef) => {
+                //     console.log("Document written with ID: ", docRef.id);
+                //     window.location.href = '/dashboard'
+                // })
+                // .catch((error) => {
+                //     console.error("Error adding document: ", error);
+                // });
               })
             })
             // ...

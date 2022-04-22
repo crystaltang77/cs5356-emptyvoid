@@ -6,6 +6,23 @@
 
 </head>
 
+<script src="https://www.gstatic.com/firebasejs/9.6.9/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.9/firebase-auth-compat.js"></script>
+<script>
+   const firebaseApp = firebase.initializeApp({ 
+      apiKey: "AIzaSyD7iI_l0XTIhgiyQzaw5PADbdWFia7B9CY",
+      authDomain: "emptyvoid-47fab.firebaseapp.com",
+      projectId: "emptyvoid-47fab",
+      storageBucket: "emptyvoid-47fab.appspot.com",
+      messagingSenderId: "493812433604",
+      appId: "1:493812433604:web:fbfa8519284e8eef86bf91",
+      measurementId: "G-8TKK2V9JSY"
+    });
+   const db = firebaseApp.firestore();
+   const auth = firebaseApp.auth();
+</script>
+
 <body>
   <header>
     <%- include('../partials/nav', { email: user.email }) %>
@@ -29,7 +46,7 @@
           <div class="has-text-weight-bold mb-2">
             Create a new thought
           </div>
-          <form action="/dog-messages" method="post">
+          <form id="post-rant" action="/dog-messages" method="post">
             <input class="input" type="text" name="message" placeholder="What's on your mind?" />
             <button class="button mt-2">Rant!</button>
           </form>
@@ -44,5 +61,47 @@
 </body>
 
 <%- include('../partials/footer') %>
+
+<script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-auth-compat.js"></script>
+
+<script>
+
+  window.onload = () => {
+    console.log('Running onload')
+    const firebaseConfig = {
+      // CS5356 TODO #2
+      // Copy your Firebase config here too
+      apiKey: "AIzaSyD7iI_l0XTIhgiyQzaw5PADbdWFia7B9CY",
+      authDomain: "emptyvoid-47fab.firebaseapp.com",
+      projectId: "emptyvoid-47fab",
+      storageBucket: "emptyvoid-47fab.appspot.com",
+      messagingSenderId: "493812433604",
+      appId: "1:493812433604:web:fbfa8519284e8eef86bf91",
+      measurementId: "G-8TKK2V9JSY"
+    };
+
+    document
+    .getElementById("post-rant")
+    .addEventListener("submit", (event) => {
+
+      const message = event.target.message.value
+      console.log(message)
+      debugger;
+
+      db.collection("rants").add({
+        username: "username",
+        rant: message,
+        timestamp: "time" // TODO
+      })
+      .then(() => {
+        console.log("Document successfully written!");
+      })
+      .catch((error) => {
+        console.error("Error writing document: ", error);
+      });
+    });
+  };
+</script>
 
 </html>

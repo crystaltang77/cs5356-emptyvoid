@@ -82,6 +82,8 @@
           .then((userCredential) => {
             // Signed in 
             var user = userCredential.user;
+            var uid = "user" + user.uid; // how to get uid
+            var email = user.email; // how to get email
 
             user.getIdToken().then((idToken) => {
               fetch('/sessionLogin', {
@@ -90,8 +92,8 @@
                 body: JSON.stringify({ idToken })
               }).then(() => {
                 db.collection("users").add({
-                  email: "email1", // TODO: how to get email, help
-                  username: "username"
+                  email: email, // TODO: how to get email, help
+                  username: uid
                 })
                 .then((docRef) => {
                     console.log("Document written with ID: ", docRef.id);

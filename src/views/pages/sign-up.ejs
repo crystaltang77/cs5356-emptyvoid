@@ -82,16 +82,20 @@
           .then((userCredential) => {
             // Signed in 
             var user = userCredential.user;
+            var uid = "user" + user.uid; // how to get uid
+            var email = user.email; // how to get email
 
             user.getIdToken().then((idToken) => {
-              fetch('/sessionLogin', {
+              fetch('/sessionLogin', { 
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ idToken })
               }).then(() => {
+                window.location.href = '/dashboard'
                 db.collection("users").add({
-                  email: "email1", // TODO: how to get email, help
-                  username: "username"
+                  email: email, 
+                  username: uid,
+                  numPosts: 0
                 })
                 .then((docRef) => {
                     console.log("Document written with ID: ", docRef.id);

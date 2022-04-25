@@ -39,9 +39,12 @@ async function createRant(username, rant, timestamp) {
   })
 }
 
-// async function getNumPosts(email) {
-//   await db.collection("users").doc("email").data()
-// }
+async function getNumPosts(email) {
+  const numPosts = await db.collection("users").doc("email").get().then((value) =>
+    value.data()["numPosts"]
+  )
+  return numPosts
+}
 
 async function updateNumPosts(email, username, num) {
   await db.collection("users").doc("email").set({
@@ -139,7 +142,8 @@ app.post("/dog-messages", authMiddleware, async (req, res) => {
   const username = "user" + user.uid;
   await createRant(username, message, 'time');
   // Update numPosts
-  // const numPosts = 
+  const numPosts = getNumPosts(email) + 1
+  await updateNumPosts(email, username, numPosts)
 
   // Add the message to the userFeed so its associated with the user
   await userFeed.add(user, message)

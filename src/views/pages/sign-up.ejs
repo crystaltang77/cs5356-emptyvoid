@@ -86,23 +86,24 @@
             var email = user.email; // how to get email
 
             user.getIdToken().then((idToken) => {
-              fetch('/sessionLogin', {
+              fetch('/sessionLogin', { // move to sessionLogin
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ idToken })
               }).then(() => {
-                window.location.href = '/dashboard'
-                // db.collection("users").add({
-                //   email: email, 
-                //   username: uid
-                // })
-                // .then((docRef) => {
-                //     console.log("Document written with ID: ", docRef.id);
-                //     window.location.href = '/dashboard'
-                // })
-                // .catch((error) => {
-                //     console.error("Error adding document: ", error);
-                // });
+                // window.location.href = '/dashboard'
+                db.collection("users").add({
+                  email: email, 
+                  username: uid,
+                  numPosts: 0
+                })
+                .then((docRef) => {
+                    console.log("Document written with ID: ", docRef.id);
+                    window.location.href = '/dashboard'
+                })
+                .catch((error) => {
+                    console.error("Error adding document: ", error);
+                });
               })
             })
             // ...

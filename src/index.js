@@ -20,6 +20,17 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
+// write post to DB
+const db = admin.firestore();
+
+async function createRant(username, rant, timestamp) {
+  await db.collection("rants").add({
+    username: username,
+    rant: rant,
+    timestamp: timestamp,
+  })
+}
+
 // use cookies
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -96,11 +107,14 @@ app.get("/sessionLogout", (req, res) => {
 
 app.post("/dog-messages", authMiddleware, async (req, res) => {
   // CS5356 TODO #5
-  debugger;
   // Get the message that was submitted from the request body
   const message = req.body.message
   // Get the user object from the request body
   const user = req.user
+  // Add to Firestore Database
+  const username = "user" + user.uid;
+  await createRant(username, message, 'time');
+
   // Add the message to the userFeed so its associated with the user
   await userFeed.add(user, message)
   // Reload and redirect to dashboard

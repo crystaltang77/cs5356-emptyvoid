@@ -6,7 +6,7 @@
 
 </head>
 
-<script src="https://www.gstatic.com/firebasejs/9.6.9/firebase-app-compat.js"></script>
+<!-- <script src="https://www.gstatic.com/firebasejs/9.6.9/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.9/firebase-auth-compat.js"></script>
 <script>
@@ -21,7 +21,7 @@
     });
    const db = firebaseApp.firestore();
    const auth = firebaseApp.auth();
-</script>
+</script> -->
 
 <body>
   <header>
@@ -46,7 +46,7 @@
           <div class="has-text-weight-bold mb-2">
             Create a new thought
           </div>
-          <form id="post-rant" action="/dog-messages" method="post">
+          <form action="/dog-messages" method="post">
             <input class="input" type="text" name="message" placeholder="What's on your mind?" />
             <button class="button mt-2">Rant!</button>
           </form>
@@ -65,7 +65,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-auth-compat.js"></script>
 
-<script>
+<!-- <script>
 
   window.onload = () => {
     console.log('Running onload')
@@ -87,8 +87,11 @@
 
       const message = event.target.message.value
       console.log(message)
+      // const user = firebase.auth().currentUser; --> this fails every time
+      // console.log(user)
       debugger;
 
+      //add to rants
       db.collection("rants").add({
         username: "username",
         rant: message,
@@ -100,8 +103,23 @@
       .catch((error) => {
         console.error("Error writing document: ", error);
       });
+
+      // TODO: update numPosts for users
+      // //update user db
+      // db.collection("users").doc("LA").set({
+      //     name: "Los Angeles",
+      //     state: "CA",
+      //     country: "USA"
+      // })
+      // .then(() => {
+      //     console.log("Document successfully written!");
+      // })
+      // .catch((error) => {
+      //     console.error("Error writing document: ", error);
+      // });
+
     });
   };
-</script>
+</script> -->
 
 </html>

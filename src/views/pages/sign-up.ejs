@@ -82,28 +82,28 @@
           .then((userCredential) => {
             // Signed in 
             var user = userCredential.user;
-            var uid = "user" + user.uid; // how to get uid
-            var email = user.email; // how to get email
+            var uid = "user" + user.uid; 
+            var email = user.email; 
 
             user.getIdToken().then((idToken) => {
               fetch('/sessionLogin', { 
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ idToken })
+                body: JSON.stringify({ idToken, isSignUp: true })
               }).then(() => {
                 window.location.href = '/dashboard'
-                db.collection("users").add({
-                  email: email, 
-                  username: uid,
-                  numPosts: 0
-                })
-                .then((docRef) => {
-                    console.log("Document written with ID: ", docRef.id);
-                    window.location.href = '/dashboard'
-                })
-                .catch((error) => {
-                    console.error("Error adding document: ", error);
-                });
+                // db.collection("users").add({
+                //   email: email, 
+                //   username: uid,
+                //   numPosts: 0
+                // })
+                // .then((docRef) => {
+                //     console.log("Document written with ID: ", docRef.id);
+                //     window.location.href = '/dashboard'
+                // })
+                // .catch((error) => {
+                //     console.error("Error adding document: ", error);
+                // });
               })
             })
             // ...

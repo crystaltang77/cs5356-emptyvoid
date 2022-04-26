@@ -20,11 +20,21 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
+function parseJwt (token) {
+  var base64Url = token.split('.')[1];
+  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+
+  return JSON.parse(jsonPayload);
+};
+
 // write post to DB
 const db = admin.firestore();
 
 async function createUser(email, username) {
-  await db.collection("rants").add({
+  await db.collection("users").add({
     email: email, 
     username: username,
     numPosts: 0
@@ -104,28 +114,58 @@ app.post("/sessionLogin", async (req, res) => {
   // Set that cookie with the name 'session'
   // And then return a 200 status code instead of a 501
   const idToken = req.body.idToken;
+  const isSignUp = req.body.isSignUp;
 
   const expiresIn = 60 * 60 * 24 * 5 * 1000;
 
-  admin
-    .auth()
-    .createSessionCookie(idToken, { expiresIn })
-    .then(
-      session => {
-        const options = { maxAge: expiresIn, httpOnly: true };
-        res.cookie("__session", session, options);
-        res.status(200).send(JSON.stringify({ status: "success" }));
-      },
-      error => {
-        res.status(401).send("UNAUTHORIZED REQUEST");
-      }
-    )
-  
-  const user = req.user;
-  const email = user.email;
-  const username = "user" + user.uid;
-  // await createUser(email, username);
+  // method 1
+  // admin
+  //   .auth()
+  //   .createSessionCookie(idToken, { expiresIn })
+  //   .then(
+  //     session => {
+  //       const options = { maxAge: expiresIn, httpOnly: true };
+  //       res.cookie("__session", session, options);
+  //       // add into firestore if signin =true
+  //       if (isSignUp) {
+  //         const user = parseJwt(idToken)
+  //         const email = user.email;
+  //         const username = "user" + user.user_id;
+  //         console.log(user)
+  //         console.log(email)
+  //         console.log(username)
+
+  //       await createUser(email, username);
+  //       }
+  //       res.status(200).send(JSON.stringify({ status: "success" }));
+  //     },
+  //     error => {
+  //       res.status(401).send("UNAUTHORIZED REQUEST");
+  //     }
+  //   )
+
+  // method 2
+  try {
+    const session = await admin.auth().createSessionCookie(idToken, { expiresIn })
     
+    const options = { maxAge: expiresIn, httpOnly: true };
+    res.cookie("__session", session, options);
+    // add into firestore if signin =true
+    if (isSignUp) {
+      const user = parseJwt(idToken)
+      const email = user.email;
+      const username = "user" + user.user_id;
+      console.log(user)
+      console.log(email)
+      console.log(username)
+      await createUser(email, username);
+    }
+
+    
+    res.status(200).send(JSON.stringify({ status: "success" }));
+  } catch(err) {
+    res.status(401).send("UNAUTHORIZED REQUEST");
+  }
 });
 
 app.get("/sessionLogout", (req, res) => {
@@ -139,11 +179,12 @@ app.post("/dog-messages", authMiddleware, async (req, res) => {
   // Get the user object from the request body
   const user = req.user
   // Add to Firestore Database
-  const username = "user" + user.uid;
+  const email = user.email
+  const username = "user" + user.user_id;
   await createRant(username, message, 'time');
   // Update numPosts
-  const numPosts = getNumPosts(email) + 1
-  await updateNumPosts(email, username, numPosts)
+  const numPosts = await getNumPosts(email)
+  await updateNumPosts(email, username, parseInt(numPosts) + 1)
 
   // Add the message to the userFeed so its associated with the user
   await userFeed.add(user, message)

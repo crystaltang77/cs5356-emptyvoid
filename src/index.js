@@ -16,9 +16,9 @@ const authMiddleware = require("./app/auth-middleware");
 
 // CS5356 TODO #2
 // Uncomment this next block after you've created serviceAccountKey.json
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+// });
 
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
@@ -50,9 +50,17 @@ async function createRant(username, rant, timestamp) {
 }
 
 async function getNumPosts(email) {
-  const numPosts = await db.collection("users").doc("email").get().then((value) =>
-    value.data()["numPosts"]
-  )
+  // console.log(email)
+  // const value = await db.collection("users").doc("email").get().then((value) =>
+  //   value
+  // )
+  // console.log(value)
+
+  const numPosts = await db.collection("users").doc("email").get().then((value) => {
+    if (data.exists) {
+      value.data()["numPosts"]
+    }
+  })
   return numPosts
 }
 
@@ -62,6 +70,18 @@ async function updateNumPosts(email, username, num) {
     username: username,
     numPosts: num
   })
+}
+
+// TODO: delete
+async function getAllPosts() {
+  const markers = [];
+  await db.collection("rants").get()
+    .then(querySnapshot => {
+      querySnapshot.docs.forEach(doc => {
+      markers.push(doc.data());
+    });
+  });
+  return markers;
 }
 
 // use cookies
@@ -178,10 +198,14 @@ app.post("/dog-messages", authMiddleware, async (req, res) => {
   const message = req.body.message
   // Get the user object from the request body
   const user = req.user
+
+  const allPosts = await getAllPosts()
+  console.log(allPosts)
+
   // Add to Firestore Database
   const email = user.email
   const username = "user" + user.user_id;
-  await createRant(username, message, 'time');
+  await createRant(username, message, "time");
   // Update numPosts
   const numPosts = await getNumPosts(email)
   await updateNumPosts(email, username, parseInt(numPosts) + 1)
@@ -189,6 +213,9 @@ app.post("/dog-messages", authMiddleware, async (req, res) => {
   // Add the message to the userFeed so its associated with the user
   await userFeed.add(user, message)
   // Reload and redirect to dashboard
+
+  
+
   res.redirect('/dashboard')
 });
 

@@ -1,3 +1,23 @@
+const admin = require("firebase-admin");
+const serviceAccount = require("./../../config/serviceAccountKey.json");
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
+
+const db = admin.firestore();
+
+
+async function getAllPosts() {
+  const markers = [];
+  await db.collection("rants").get()
+    .then(querySnapshot => {
+      querySnapshot.docs.forEach(doc => {
+      markers.push(doc.data());
+    });
+  });
+  return markers;
+}
+
 const casual = require("casual");
 const fetch = require("node-fetch");
 
@@ -21,6 +41,21 @@ const get = async () => {
 
   return userFeed;
 };
+
+// const get = async () => {
+//   const response = await fetch("https://dog.ceo/api/breeds/image/random/5");
+//   const body = await response.json();
+//   const posts = await getAllPosts();
+//   console.log(posts);
+//   for (const post of posts) {
+//     userFeed.push({
+//       name: post.username,
+//       nameHandle: `@${ post.username}`,
+//       message: `${casual.sentence}. ${ post.rant}`,
+//       imageSource: "",
+//     });
+//   }
+// }
 
 const add = async (user, message) => {
   const response = await fetch("https://dog.ceo/api/breeds/image/random/1");

@@ -50,16 +50,8 @@ async function createRant(username, rant, timestamp) {
 }
 
 async function getNumPosts(email) {
-  // console.log(email)
-  // const value = await db.collection("users").doc(email).get().then((value) =>
-  //   value
-  // )
-  // console.log(value)
-
   const numPosts = await db.collection("users").doc(email).get().then((value) => 
-    // if (value.exists) {
-      value.data()["numPosts"]
-    // }
+    value.data()["numPosts"]
   )
   return numPosts
 }
@@ -70,18 +62,6 @@ async function updateNumPosts(email, username, num) {
     username: username,
     numPosts: num
   })
-}
-
-// TODO: delete
-async function getAllPosts() {
-  const markers = [];
-  await db.collection("rants").get()
-    .then(querySnapshot => {
-      querySnapshot.docs.forEach(doc => {
-      markers.push(doc.data());
-    });
-  });
-  return markers;
 }
 
 // use cookies
@@ -138,32 +118,6 @@ app.post("/sessionLogin", async (req, res) => {
 
   const expiresIn = 60 * 60 * 24 * 5 * 1000;
 
-  // method 1
-  // admin
-  //   .auth()
-  //   .createSessionCookie(idToken, { expiresIn })
-  //   .then(
-  //     session => {
-  //       const options = { maxAge: expiresIn, httpOnly: true };
-  //       res.cookie("__session", session, options);
-  //       // add into firestore if signin =true
-  //       if (isSignUp) {
-  //         const user = parseJwt(idToken)
-  //         const email = user.email;
-  //         const username = "user" + user.user_id;
-  //         console.log(user)
-  //         console.log(email)
-  //         console.log(username)
-
-  //       await createUser(email, username);
-  //       }
-  //       res.status(200).send(JSON.stringify({ status: "success" }));
-  //     },
-  //     error => {
-  //       res.status(401).send("UNAUTHORIZED REQUEST");
-  //     }
-  //   )
-
   // method 2
   try {
     const session = await admin.auth().createSessionCookie(idToken, { expiresIn })
@@ -198,10 +152,6 @@ app.post("/dog-messages", authMiddleware, async (req, res) => {
   const message = req.body.message
   // Get the user object from the request body
   const user = req.user
-
-  const allPosts = await getAllPosts()
-  console.log(allPosts)
-
   // Add to Firestore Database
   const email = user.email
   const username = "user" + user.user_id;

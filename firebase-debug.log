@@ -2727,3 +2727,105 @@ INFO: Detected non-HTTP/2 connection.
 [debug] [2022-04-27T22:52:19.846Z] Analyzing nodejs backend spec
 [debug] [2022-04-27T22:52:19.851Z] [worker-us-central1-app-8d644176-b69a-4af0-b0a9-7026710cc08e]: exited {"metadata":{"emulator":{"name":"functions"},"message":"[worker-us-central1-app-8d644176-b69a-4af0-b0a9-7026710cc08e]: exited"}}
 [debug] [2022-04-27T22:52:19.851Z] [worker-us-central1-app-8d644176-b69a-4af0-b0a9-7026710cc08e]: FINISHED {"metadata":{"emulator":{"name":"functions"},"message":"[worker-us-central1-app-8d644176-b69a-4af0-b0a9-7026710cc08e]: FINISHED"}}
+[debug] [2022-04-27T22:53:14.820Z] Apr 27, 2022 6:53:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Apr 27, 2022 6:53:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-04-27T22:53:37.273Z] File /Users/crystaltang/Documents/CornellTech/Spring2022/CS5356/cs5356-emptyvoid/src/index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/crystaltang/Documents/CornellTech/Spring2022/CS5356/cs5356-emptyvoid/src/index.js changed, reloading triggers"}}
+[debug] [2022-04-27T22:53:38.283Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2022-04-27T22:53:39.409Z] > [functions] package.json contents: {
+  "name": "2022-cs-5356-milestone-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "bulma": "^0.9.3",
+    "casual": "^1.6.2",
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "firebase": "^8.10.0",
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^3.19.0",
+    "kill-port": "^1.6.1",
+    "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "cypress": "^9.3.1"
+  }
+}
+[debug] [2022-04-27T22:53:39.409Z] Building nodejs source
+[debug] [2022-04-27T22:53:39.409Z] Analyzing nodejs backend spec
+[debug] [2022-04-27T22:53:56.598Z] File /Users/crystaltang/Documents/CornellTech/Spring2022/CS5356/cs5356-emptyvoid/src/index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/crystaltang/Documents/CornellTech/Spring2022/CS5356/cs5356-emptyvoid/src/index.js changed, reloading triggers"}}
+[debug] [2022-04-27T22:53:57.604Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2022-04-27T22:53:58.749Z] > [functions] package.json contents: {
+  "name": "2022-cs-5356-milestone-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "bulma": "^0.9.3",
+    "casual": "^1.6.2",
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "firebase": "^8.10.0",
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^3.19.0",
+    "kill-port": "^1.6.1",
+    "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "cypress": "^9.3.1"
+  }
+}
+[debug] [2022-04-27T22:53:58.749Z] Building nodejs source
+[debug] [2022-04-27T22:53:58.749Z] Analyzing nodejs backend spec
+[debug] [2022-04-27T22:54:10.808Z] File /Users/crystaltang/Documents/CornellTech/Spring2022/CS5356/cs5356-emptyvoid/src/index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/crystaltang/Documents/CornellTech/Spring2022/CS5356/cs5356-emptyvoid/src/index.js changed, reloading triggers"}}
+[debug] [2022-04-27T22:54:11.813Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2022-04-27T22:54:12.657Z] > [functions] package.json contents: {
+  "name": "2022-cs-5356-milestone-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "bulma": "^0.9.3",
+    "casual": "^1.6.2",
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "firebase": "^8.10.0",
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^3.19.0",
+    "kill-port": "^1.6.1",
+    "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "cypress": "^9.3.1"
+  }
+}
+[debug] [2022-04-27T22:54:12.657Z] Building nodejs source
+[debug] [2022-04-27T22:54:12.657Z] Analyzing nodejs backend spec
+[debug] [2022-04-27T22:54:14.940Z] Apr 27, 2022 6:54:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Apr 27, 2022 6:54:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}

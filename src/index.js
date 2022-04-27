@@ -42,7 +42,7 @@ async function createUser(email, username) {
 }
 
 async function createRant(username, rant, timestamp) {
-  await db.collection("rants").add({
+  return await db.collection("rants").add({
     username: username,
     rant: rant,
     timestamp: timestamp,
@@ -155,13 +155,13 @@ app.post("/dog-messages", authMiddleware, async (req, res) => {
   // Add to Firestore Database
   const email = user.email
   const username = "user" + user.user_id;
-  await createRant(username, message, "time");
+  const rant = await createRant(username, message, "time");
   // Update numPosts
   const numPosts = await getNumPosts(email)
   await updateNumPosts(email, username, parseInt(numPosts) + 1)
 
   // Add the message to the userFeed so its associated with the user
-  await userFeed.add(user, message)
+  await userFeed.add(rant)
   // Reload and redirect to dashboard
 
   

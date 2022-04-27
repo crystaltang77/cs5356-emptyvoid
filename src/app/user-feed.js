@@ -43,30 +43,17 @@ const userFeed = [];
 // };
 
 const get = async () => {
-  const response = await fetch("https://dog.ceo/api/breeds/image/random/5");
-  const body = await response.json();
+  // const response = await fetch("https://dog.ceo/api/breeds/image/random/5");
+  // const body = await response.json();
   const posts = await getAllPosts();
   console.log(posts);
   return posts;
-  // for (const post of posts) {
-  //   userFeed.push({
-  //     name: post.username,
-  //     nameHandle: `@${ post.username}`,
-  //     message: `${casual.sentence}. ${ post.rant}`,
-  //     imageSource: "",
-  //   });
-  // }
 }
 
-const add = async (user, message) => {
-  const response = await fetch("https://dog.ceo/api/breeds/image/random/1");
-  const body = await response.json();
-  userFeed.unshift({
-    name: user.name,
-    nameHandle: user.email,
-    message: message,
-    imageSource: body.message,
-  });
+const add = async (rant) => {
+  // const response = await fetch("https://dog.ceo/api/breeds/image/random/1");
+  // const body = await response.json();
+  userFeed.push(rant);
 };
 
 module.exports = {

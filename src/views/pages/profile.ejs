@@ -45,10 +45,10 @@
       <div class="column is-4">
         <div class="mb-6">
           <div class="has-text-weight-bold mb-2; text-align:center">
-            Hello, user<%= user.uid%>!
+            Hello, <%= user.username%>!
           </div>
           <div class="has-text-weight-bold mb-2; text-align:center">
-            You currently have # posts in your Void.
+            You currently have <%= user.numPosts%> posts in your Void.
           </div>
           <div class="has-text-weight-bold mb-2; text-align:center">
             Email: 

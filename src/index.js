@@ -41,6 +41,13 @@ async function createUser(email, username) {
   })
 }
 
+async function getUser(email) {
+  const user = await db.collection("users").doc(email).get().then((value) => 
+    value.data()
+  )
+  return user
+}
+
 async function createRant(username, rant, timestamp) {
   return await db.collection("rants").add({
     username: username,
@@ -105,7 +112,9 @@ app.get("/dashboard", authMiddleware, async function (req, res) {
 
 app.get("/profile", authMiddleware, async function (req, res) {
   const feed = await userFeed.get();
-  res.render("pages/profile", { user: req.user, feed });
+  const email = req.user.email
+  const user = await getUser(email)
+  res.render("pages/profile", { user: user, feed });
 });
 
 app.post("/sessionLogin", async (req, res) => {
@@ -129,13 +138,8 @@ app.post("/sessionLogin", async (req, res) => {
       const user = parseJwt(idToken)
       const email = user.email;
       const username = "user" + user.user_id;
-      // console.log(user)
-      // console.log(email)
-      // console.log(username)
       await createUser(email, username);
     }
-
-    
     res.status(200).send(JSON.stringify({ status: "success" }));
   } catch(err) {
     res.status(401).send("UNAUTHORIZED REQUEST");
@@ -163,8 +167,6 @@ app.post("/dog-messages", authMiddleware, async (req, res) => {
   // Add the message to the userFeed so its associated with the user
   await userFeed.add(rant)
   // Reload and redirect to dashboard
-
-  
 
   res.redirect('/dashboard')
 });

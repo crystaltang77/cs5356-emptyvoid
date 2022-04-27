@@ -41,6 +41,13 @@ async function createUser(email, username) {
   })
 }
 
+async function getUser(email) {
+  const user = await db.collection("users").doc(email).get().then((value) => 
+    value.data()
+  )
+  return user
+}
+
 async function createRant(username, rant, timestamp) {
   return await db.collection("rants").add({
     username: username,
@@ -105,7 +112,9 @@ app.get("/dashboard", authMiddleware, async function (req, res) {
 
 app.get("/profile", authMiddleware, async function (req, res) {
   const feed = await userFeed.get();
-  res.render("pages/profile", { user: req.user, feed });
+  const email = req.user.email
+  const user = await getUser(email)
+  res.render("pages/profile", { user: user, feed });
 });
 
 app.post("/sessionLogin", async (req, res) => {

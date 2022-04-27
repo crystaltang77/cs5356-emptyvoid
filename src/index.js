@@ -34,7 +34,7 @@ function parseJwt (token) {
 const db = admin.firestore();
 
 async function createUser(email, username) {
-  await db.collection("users").add({
+  await db.collection("users").doc(email).set({
     email: email, 
     username: username,
     numPosts: 0
@@ -51,21 +51,21 @@ async function createRant(username, rant, timestamp) {
 
 async function getNumPosts(email) {
   // console.log(email)
-  // const value = await db.collection("users").doc("email").get().then((value) =>
+  // const value = await db.collection("users").doc(email).get().then((value) =>
   //   value
   // )
   // console.log(value)
 
-  const numPosts = await db.collection("users").doc("email").get().then((value) => {
-    if (data.exists) {
+  const numPosts = await db.collection("users").doc(email).get().then((value) => 
+    // if (value.exists) {
       value.data()["numPosts"]
-    }
-  })
+    // }
+  )
   return numPosts
 }
 
 async function updateNumPosts(email, username, num) {
-  await db.collection("users").doc("email").set({
+  await db.collection("users").doc(email).set({
     email: email, 
     username: username,
     numPosts: num

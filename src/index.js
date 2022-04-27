@@ -16,9 +16,9 @@ const authMiddleware = require("./app/auth-middleware");
 
 // CS5356 TODO #2
 // Uncomment this next block after you've created serviceAccountKey.json
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+// });
 
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
@@ -34,7 +34,7 @@ function parseJwt (token) {
 const db = admin.firestore();
 
 async function createUser(email, username) {
-  await db.collection("users").add({
+  await db.collection("users").doc(email).set({
     email: email, 
     username: username,
     numPosts: 0
@@ -42,7 +42,7 @@ async function createUser(email, username) {
 }
 
 async function createRant(username, rant, timestamp) {
-  await db.collection("rants").add({
+  return await db.collection("rants").add({
     username: username,
     rant: rant,
     timestamp: timestamp,
@@ -50,14 +50,14 @@ async function createRant(username, rant, timestamp) {
 }
 
 async function getNumPosts(email) {
-  const numPosts = await db.collection("users").doc("email").get().then((value) =>
+  const numPosts = await db.collection("users").doc(email).get().then((value) => 
     value.data()["numPosts"]
   )
   return numPosts
 }
 
 async function updateNumPosts(email, username, num) {
-  await db.collection("users").doc("email").set({
+  await db.collection("users").doc(email).set({
     email: email, 
     username: username,
     numPosts: num
@@ -118,32 +118,6 @@ app.post("/sessionLogin", async (req, res) => {
 
   const expiresIn = 60 * 60 * 24 * 5 * 1000;
 
-  // method 1
-  // admin
-  //   .auth()
-  //   .createSessionCookie(idToken, { expiresIn })
-  //   .then(
-  //     session => {
-  //       const options = { maxAge: expiresIn, httpOnly: true };
-  //       res.cookie("__session", session, options);
-  //       // add into firestore if signin =true
-  //       if (isSignUp) {
-  //         const user = parseJwt(idToken)
-  //         const email = user.email;
-  //         const username = "user" + user.user_id;
-  //         console.log(user)
-  //         console.log(email)
-  //         console.log(username)
-
-  //       await createUser(email, username);
-  //       }
-  //       res.status(200).send(JSON.stringify({ status: "success" }));
-  //     },
-  //     error => {
-  //       res.status(401).send("UNAUTHORIZED REQUEST");
-  //     }
-  //   )
-
   // method 2
   try {
     const session = await admin.auth().createSessionCookie(idToken, { expiresIn })
@@ -155,9 +129,9 @@ app.post("/sessionLogin", async (req, res) => {
       const user = parseJwt(idToken)
       const email = user.email;
       const username = "user" + user.user_id;
-      console.log(user)
-      console.log(email)
-      console.log(username)
+      // console.log(user)
+      // console.log(email)
+      // console.log(username)
       await createUser(email, username);
     }
 
@@ -181,14 +155,17 @@ app.post("/dog-messages", authMiddleware, async (req, res) => {
   // Add to Firestore Database
   const email = user.email
   const username = "user" + user.user_id;
-  await createRant(username, message, 'time');
+  const rant = await createRant(username, message, Date.now());
   // Update numPosts
   const numPosts = await getNumPosts(email)
   await updateNumPosts(email, username, parseInt(numPosts) + 1)
 
   // Add the message to the userFeed so its associated with the user
-  await userFeed.add(user, message)
+  await userFeed.add(rant)
   // Reload and redirect to dashboard
+
+  
+
   res.redirect('/dashboard')
 });
 

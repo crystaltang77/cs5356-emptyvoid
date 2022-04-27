@@ -129,9 +129,9 @@ app.post("/sessionLogin", async (req, res) => {
       const user = parseJwt(idToken)
       const email = user.email;
       const username = "user" + user.user_id;
-      console.log(user)
-      console.log(email)
-      console.log(username)
+      // console.log(user)
+      // console.log(email)
+      // console.log(username)
       await createUser(email, username);
     }
 
@@ -155,7 +155,7 @@ app.post("/dog-messages", authMiddleware, async (req, res) => {
   // Add to Firestore Database
   const email = user.email
   const username = "user" + user.user_id;
-  const rant = await createRant(username, message, "time");
+  const rant = await createRant(username, message, Date.now());
   // Update numPosts
   const numPosts = await getNumPosts(email)
   await updateNumPosts(email, username, parseInt(numPosts) + 1)

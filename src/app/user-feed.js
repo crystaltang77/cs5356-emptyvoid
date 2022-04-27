@@ -9,14 +9,19 @@ const db = admin.firestore();
 
 async function getAllPosts() {
   const markers = [];
-  await db.collection("rants").get()
+  await db.collection("rants").orderBy("timestamp").get()
     .then(querySnapshot => {
       querySnapshot.docs.forEach(doc => {
       markers.push(doc.data());
     });
   });
-  return markers;
+  // const sorted = markers.orderBy("time")
+  return markers.reverse();
 }
+
+// function sortPosts(posts) {
+  
+// }
 
 const casual = require("casual");
 const fetch = require("node-fetch");

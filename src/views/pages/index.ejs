@@ -1,82 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <%- include('../partials/head') %>
-    <!-- Include any custom css classes that you want available on this page here -->
-    <style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cover - Free Bulma template</title>
+    <link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <!-- Bulma Version 0.9.0-->
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+    <style type="text/css">
+        html,
+        body {
+            font-family: 'Open Sans';
+        }
 
+        img {
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
     </style>
 </head>
 
 <body>
-  <header>
-    <%- include('../partials/nav') %>
-
-  </header>
-
-  <!-- Fill me in! -->
-  <!-- CS5356 TODO #1 Add your landing page here -->
-  <section class="hero is-primary">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title is-1">Empty Void</h1>
-        <h2 class="subtitle">A personal abyss for your thoughts</h2>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div style="padding: 10px; border: 1px solid lightgray; margin: 10px; text-align:center">
-      <h2 class="title">The Problem</h2>
-      <p>Want to scream and shout and let it all out, but no one has ears to lend at the moment? Throw it all into the void.</p>
-    </div>
-  </section>
-
-  <section class="hero">
-    <div style="padding: 10px; border: 1px solid lightgray; margin: 10px; text-align:center">
-      <h2 class="title">The Solution</h2>
-      <p>A web app that allows you to rant about whatever is on your mind.</p>
-    </div>
-  </section>
-
-  <section>
-    <div style="padding: 10px; border: 1px solid lightgray; margin: 10px; text-align:center">
-      <h2 class="title">Feature Set</h2>
-      <div class="columns">
-        <div class="column">
-          <div class="card-content">
-            <h2 class="subtitle"><strong>Post Your Public or Private Thoughts.</strong></h2>
-            <p>Trivial thoughts? No such thing. Throw it into the void for the world to see or to disappear forever.</p>
-          </div>
+    <section class="hero is-fullheight is-default is-bold">
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+                    <div class="navbar-brand">
+                        <a class="navbar-item" href="../">
+                        </a>
+                        <span class="navbar-burger burger" data-target="navbarMenu">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </div>
+                    <div id="navbarMenu" class="navbar-menu">
+                        <div class="navbar-end">
+                            <div class="tabs is-right">
+                                <ul>
+                                    <li class="is-active"><a href="/">Home</a></li>
+                                    <li><a href="/sign-in">Sign In</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
         </div>
-        <div class="column">
-          <div class="card-content">
-            <h2 class="subtitle"><strong>See What's On Others' Minds.</strong></h2>
-            <p>Use the public postings feed to see the sufferings of the Empty Void community.</p>
-          </div>
-        </div>
-        <div class="column">
-          <div class="card-content">
-            <h2 class="subtitle"><strong>Exclusive Access to the Community.</strong></h2>
-            <p>Be part of the elite group of Empty Voiders. It's free and therapeutic!</p>
-          </div>
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="columns is-vcentered">
+                    <div class="column is-5">
+                        <figure class="image is-4by3">
+                            <img src="emptyvoidpic.jpeg" alt="Description">
+                        </figure>
+                    </div>
+                    <div class="column is-6 is-offset-1">
+                        <h1 class="title is-2">
+                            Empty Void
+                        </h1>
+                        <h2 class="subtitle is-4">
+                            A personal abyss for your thoughts.
+                        </h2>
+                        <br>
+                        <p class="has-text-centered">
+                          <a class="button is-medium is-info is-outlined" href="/sign-up">Sign Up
+                          </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
       </div>
-    </div>
-  </section>
+      <section class="container">
+          <div class="columns features">
+              <div class="column is-4">
+                  <div class="card is-shady">
+                      <div class="card-image has-text-centered">
+                      </div>
+                      <div class="card-content">
+                          <div class="content">
+                              <h4>Post Your Thoughts</h4>
+                              <p>Throw it into the void for the world to see or to disappear forever.</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="column is-4">
+                  <div class="card is-shady">
+                      <div class="card-image has-text-centered">
+                      </div>
+                      <div class="card-content">
+                          <div class="content">
+                              <h4>See What's On Others' Minds</h4>
+                              <p>Use the public postings feed to see the sufferings of the Empty Void community.</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="column is-4">
+                  <div class="card is-shady">
+                      <div class="card-image has-text-centered">
+                      </div>
+                      <div class="card-content">
+                          <div class="content">
+                              <h4>Exclusive Community Access</h4>
+                              <p>Be part of the elite group of Empty Voiders. It's free and therapeutic!</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="intro column is-8 is-offset-2">
 
-  <section>
-    <div style="padding: 10px; border: 1px solid lightgray; margin: 10px; text-align:center">
-      <h2 class="title">New User?</h2>
-      <!-- <p>Sign Up Here!</p> -->
-      <a href="/sign-up" class="button is-primary">Sign Up</a>
-    </div>
-  </section>
-
-
+        <div class="hero-foot">
+            <div class="container">
+                <div class="tabs is-centered">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="../js/bulma.js"></script>
 </body>
-
-<%- include('../partials/footer') %>
 
 </html>

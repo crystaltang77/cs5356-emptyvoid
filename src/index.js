@@ -156,7 +156,7 @@ app.post("/sessionLogin", async (req, res) => {
 
 app.get("/sessionLogout", (req, res) => {
   res.clearCookie("session");
-  res.redirect("/sign-in");
+  res.redirect("/");
 });
 
 app.post("/dog-messages", authMiddleware, async (req, res) => {

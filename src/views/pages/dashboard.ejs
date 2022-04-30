@@ -6,6 +6,15 @@
 
 </head>
 
+<style>
+  .center-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    min-height: 260vh;
+  }</style>
+
 <head> 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -62,18 +71,8 @@
 
 
   <div class="container">
-    <div class="columns">
-      <div class="column is-3 " style="text-align: right;">
-        <aside class="menu">
-          <p class="menu-label">
-            Personal
-          </p>
-          <ul class="menu-list">
-            <li><a>Feed</a></li>
-
-          </ul>
-        </aside>
-      </div>
+      </div> 
+      <div class="center-screen">
       <div class="column is-4">
         <div class="mb-6">
           <div class="has-text-weight-bold mb-2">
@@ -81,7 +80,7 @@
           </div>
           <form action="/dog-messages" method="post">
             <input class="input" type="text" name="message" placeholder="What's on your mind?" />
-            <button class="button mt-2">Rant!</button>
+            <button class="button mt-2 is-info">Rant!</button>
           </form>
         </div>
         <div class="feed-stream">
@@ -90,6 +89,7 @@
       </div>
     </div>
   </div>
+</div>
 
 </body>
 

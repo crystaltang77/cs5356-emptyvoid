@@ -71,6 +71,9 @@ async function updateNumPosts(email, username, num) {
   })
 }
 
+// images folder
+app.use(express.static('img'));
+
 // use cookies
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -114,7 +117,7 @@ app.get("/profile", authMiddleware, async function (req, res) {
   const feed = await userFeed.get();
   const email = req.user.email
   const user = await getUser(email)
-  res.render("pages/profile", { user: user, feed });
+  res.render("pages/profile", { user: req.user, feed });
 });
 
 app.post("/sessionLogin", async (req, res) => {
@@ -153,7 +156,7 @@ app.post("/sessionLogin", async (req, res) => {
 
 app.get("/sessionLogout", (req, res) => {
   res.clearCookie("session");
-  res.redirect("/sign-in");
+  res.redirect("/");
 });
 
 app.post("/dog-messages", authMiddleware, async (req, res) => {
@@ -172,8 +175,6 @@ app.post("/dog-messages", authMiddleware, async (req, res) => {
   // Add the message to the userFeed so its associated with the user
   await userFeed.add(rant)
   // Reload and redirect to dashboard
-
-  
 
   res.redirect('/dashboard')
 });

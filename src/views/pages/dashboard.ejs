@@ -6,24 +6,74 @@
 
 </head>
 
+<style>
+  .center-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    min-height: 260vh;
+  }</style>
+
+<head> 
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <!-- Bulma Version 0.9.0-->
+  <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" /> 
+  <style type="text/css">
+      html,
+      body {
+          font-family: 'Open Sans';
+      }
+
+      img {
+          padding: 5px;
+          border: 1px solid #ccc;
+      }
+  </style>
+</head>
+
 <body>
-  <header>
-    <%- include('../partials/nav', { email: user.email }) %>
-  </header>
+  <section class="hero is-fullheight is-default is-bold">
+    <div class="hero-head">
+      <nav class="navbar">
+          <div class="container">
+              <div class="navbar-brand">
+                  <a class="navbar-item" href="../">
+                  </a>
+                  <span class="navbar-burger burger" data-target="navbarMenu">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                  </span>
+              </div>
+              <div id="navbarMenu" class="navbar-menu">
+                  <div class="navbar-end">
+                      <div class="tabs is-right">
+                          <ul>
+                              <li><a href="/">Home</a></li>
+                              <li class="is-active"><a href="/dashboard">Rants</a></li>
+                              <li><a href="/profile" class="navbar-item">
+                                <%= user.email %>
+                                <i class="material-icons">person_outline</i>
+                              </a></li>
+                              <li><a href="/sessionLogout">Sign Out</a></li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </nav>
+  </div>
+
 
   <div class="container">
-    <div class="columns">
-      <div class="column is-3 " style="text-align: right;">
-        <aside class="menu">
-          <p class="menu-label">
-            Personal
-          </p>
-          <ul class="menu-list">
-            <li><a>Feed</a></li>
-
-          </ul>
-        </aside>
-      </div>
+      </div> 
+      <div class="center-screen">
       <div class="column is-4">
         <div class="mb-6">
           <div class="has-text-weight-bold mb-2">
@@ -31,7 +81,7 @@
           </div>
           <form action="/dog-messages" method="post">
             <input class="input" type="text" name="message" placeholder="What's on your mind?" />
-            <button class="button mt-2">Rant!</button>
+            <button class="button mt-2 is-info">Rant!</button>
           </form>
         </div>
         <div class="feed-stream">
@@ -40,6 +90,7 @@
       </div>
     </div>
   </div>
+</div>
 
 </body>
 

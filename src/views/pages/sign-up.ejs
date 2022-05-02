@@ -26,6 +26,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.6.9/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.9/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-performance-compat.js"></script>
 <script>
    const firebaseApp = firebase.initializeApp({ 
       apiKey: "AIzaSyD7iI_l0XTIhgiyQzaw5PADbdWFia7B9CY",
@@ -36,6 +37,7 @@
       appId: "1:493812433604:web:fbfa8519284e8eef86bf91",
       measurementId: "G-8TKK2V9JSY"
     });
+   const perf = firebase.performance();
    const db = firebaseApp.firestore();
    const auth = firebaseApp.auth();
 </script>
@@ -288,11 +290,3 @@
 </script>
 
 </html>
-
-
-
-
-
-
-
-

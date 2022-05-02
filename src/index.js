@@ -6,6 +6,7 @@ const admin = require("firebase-admin");
 const app = express();
 const port = process.env.PORT || 8080;
 const functions = require("firebase-functions")
+import "firebase/performance";
 
 // CS5356 TODO #2
 // Uncomment this next line after you've created
@@ -19,6 +20,24 @@ const authMiddleware = require("./app/auth-middleware");
 // admin.initializeApp({
 //   credential: admin.credential.cert(serviceAccount),
 // });
+
+// firebase performance 
+const perf = firebase.performance();
+// // TODO: Initialize Firebase Performance Monitoring.
+// getPerformance();
+
+// The perfMetrics object is created by the code that goes in <head>.
+perfMetrics.onFirstInputDelay(function(delay, evt) {
+  ga('send', 'event', {
+    eventCategory: 'Perf Metrics',
+    eventAction: 'first-input-delay',
+    eventLabel: evt.type,
+    // Event values must be an integer.
+    eventValue: Math.round(delay),
+    // Exclude this event from bounce rate calculations.
+    nonInteraction: true,
+  });
+});
 
 function parseJwt (token) {
   var base64Url = token.split('.')[1];
@@ -117,7 +136,7 @@ app.get("/profile", authMiddleware, async function (req, res) {
   const feed = await userFeed.get();
   const email = req.user.email
   const user = await getUser(email)
-  res.render("pages/profile", { user: user, feed });
+  res.render("pages/profile", { user: req.user, feed });
 });
 
 app.post("/sessionLogin", async (req, res) => {
@@ -147,7 +166,6 @@ app.post("/sessionLogin", async (req, res) => {
       await createUser(email, username);
     }
 
-    
     res.status(200).send(JSON.stringify({ status: "success" }));
   } catch(err) {
     res.status(401).send("UNAUTHORIZED REQUEST");

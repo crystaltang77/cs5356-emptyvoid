@@ -6,7 +6,6 @@ const admin = require("firebase-admin");
 const app = express();
 const port = process.env.PORT || 8080;
 const functions = require("firebase-functions")
-import "firebase/performance";
 
 // CS5356 TODO #2
 // Uncomment this next line after you've created
@@ -14,30 +13,6 @@ import "firebase/performance";
 const serviceAccount = require("./../config/serviceAccountKey.json");
 const userFeed = require("./app/user-feed");
 const authMiddleware = require("./app/auth-middleware");
-
-// CS5356 TODO #2
-// Uncomment this next block after you've created serviceAccountKey.json
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount),
-// });
-
-// firebase performance 
-const perf = firebase.performance();
-// // TODO: Initialize Firebase Performance Monitoring.
-// getPerformance();
-
-// The perfMetrics object is created by the code that goes in <head>.
-perfMetrics.onFirstInputDelay(function(delay, evt) {
-  ga('send', 'event', {
-    eventCategory: 'Perf Metrics',
-    eventAction: 'first-input-delay',
-    eventLabel: evt.type,
-    // Event values must be an integer.
-    eventValue: Math.round(delay),
-    // Exclude this event from bounce rate calculations.
-    nonInteraction: true,
-  });
-});
 
 function parseJwt (token) {
   var base64Url = token.split('.')[1];

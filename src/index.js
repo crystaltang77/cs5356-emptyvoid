@@ -111,7 +111,8 @@ app.get("/profile", authMiddleware, async function (req, res) {
   const feed = await userFeed.get();
   const email = req.user.email
   const user = await getUser(email)
-  res.render("pages/profile", { user: req.user, feed });
+  console.log(user)
+  res.render("pages/profile", { user: user, feed });
 });
 
 app.post("/sessionLogin", async (req, res) => {

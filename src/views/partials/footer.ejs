@@ -1,3 +1,64 @@
+<!-- Common Footer -->
+</section>
+</body>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bulma-tagsinput@2.0.0/dist/js/bulma-tagsinput.min.js">
+</script>
+<script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-auth-compat.js"></script>
+
+
+<script>
+
+  $(document).ready(function () {
+    // For adding the new topics while creating the account
+    $('#save-topics').click(function (e) {
+      e.preventDefault();
+      var postData = new Promise((resolve, reject) => { postSignUpData(); });
+      postData.then(() => {
+        // var url = window.location.href + '/dashboard';
+        // window.location.replace(url);
+        window.location.href = '/dashboard';
+      }).catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+      });
+    });
+    // For Updating the new topics in profile
+    $('#update-topics').click(function (e) {
+      e.preventDefault();
+      var postData = new Promise((resolve, reject) => {
+        updateTopics();
+      });
+      postData.then(() => {
+        // var url = window.location.href + '/dashboard';
+        // window.location.replace(url);
+        window.location.href = '/profile';
+      }).catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+      });
+    });
+    // Action for sign In Button
+    $('#signInButton').click(function (e) {
+      e.preventDefault();
+
+      var postData = new Promise((resolve, reject) => { postSignInData(); });
+
+      postData.then(() => {
+
+        window.location.href = '/dashboard';
+        // window.location.replace(url);
+        // location.href = '/dashboard'
+      }).catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+      });
+    });
+
+  });
+</script>
+
 <script>
   // Get all "navbar-burger" elements
   const navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
@@ -19,3 +80,278 @@
     });
   }
 </script>;
+
+
+<script>
+
+  $(document).ready(function () {
+    const firebaseConfig = {
+      // CS5356 TODO #2
+      // Copy your Firebase config here too
+      apiKey: "AIzaSyD7iI_l0XTIhgiyQzaw5PADbdWFia7B9CY",
+      authDomain: "emptyvoid-47fab.firebaseapp.com",
+      projectId: "emptyvoid-47fab",
+      storageBucket: "emptyvoid-47fab.appspot.com",
+      messagingSenderId: "493812433604",
+      appId: "1:493812433604:web:fbfa8519284e8eef86bf91",
+      measurementId: "G-8TKK2V9JSY"
+    };
+
+    const app = firebase.initializeApp(firebaseConfig);
+
+    $("#signUpButton").click(function ($e) {
+      $e.preventDefault();
+      const $target = document.getElementById("addTopicModal");
+      openModal($target);
+    })
+
+    $("#addTopicButton").click(function ($e) {
+      $e.preventDefault();
+      const $target = document.getElementById("addTopicModal");
+      openModal($target);
+    })
+    $("#customInputTags").click(function (e) {
+      e.preventDefault();
+      console.log("hi");
+      $(this).parent().addClass('is-hidden');
+
+      return false;
+
+    });
+    $("#updateTopicButton").click(function ($e) {
+      $e.preventDefault();
+      const $target = document.getElementById("updateTopicModal");
+      var topic = $("#profileTopics").val();
+
+      var topicArray = topic.split(",");
+
+      openModal($target);
+      // Displaying the user inputed topics
+      if (topicArray.length > 0) {
+        for (let i = 0; i < topicArray.length; i++) {
+          createTag(topicArray[i]);
+        }
+
+      }
+    })
+  });
+
+  // Functions to open and close a modal
+  function openModal($el) {
+    $el.classList.add('is-active');
+  }
+
+  function closeModal($el) {
+    $el.classList.remove('is-active');
+  }
+
+  function closeAllModals() {
+    (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+      closeModal($modal);
+    });
+  }
+
+  // Add a click event on various child elements to close the parent modal
+  (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+    const $target = $close.closest('.modal');
+
+    $close.addEventListener('click', () => {
+      closeModal($target);
+    });
+  });
+
+  // Add a keyboard event to close all modals
+  document.addEventListener('keydown', (event) => {
+    const e = event || window.event;
+
+    if (e.keyCode === 27) { // Escape key
+      closeAllModals();
+    }
+  });
+
+  function updateTopics() {
+
+  
+    var profileUserName = $("#profileUserName").val();
+    var profilePost = $("#profilePost").val();
+    var profileEmail = $("#profileEmail").val();
+
+    var profileTopics = [];
+    $(".inputAddTopics").each(function () {
+      profileTopics.push($(this).text());
+    });
+
+
+    let params = {
+      topics: profileTopics, username: profileUserName, numPosts: profilePost, email: profileEmail
+    };
+    fetch('/update-user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(params)
+    }).then(() => {
+      alert("Updated Successfully");
+      window.location.href = '/profile'
+    })
+
+    return false;
+
+  }
+
+
+  function postSignUpData() {
+
+    const login = $(".signupForm #emailField").val();
+    const password = $(".signupForm #passwordField").val();
+    var userTopics = [];
+    $(".inputAddTopics").each(function () {
+      userTopics.push($(this).text());
+    });
+    const firebaseConfig = {
+      // CS5356 TODO #2
+      // Copy your Firebase config here too
+      apiKey: "AIzaSyD7iI_l0XTIhgiyQzaw5PADbdWFia7B9CY",
+      authDomain: "emptyvoid-47fab.firebaseapp.com",
+      projectId: "emptyvoid-47fab",
+      storageBucket: "emptyvoid-47fab.appspot.com",
+      messagingSenderId: "493812433604",
+      appId: "1:493812433604:web:fbfa8519284e8eef86bf91",
+      measurementId: "G-8TKK2V9JSY"
+    };
+
+    const app = firebase.initializeApp(firebaseConfig);
+
+    app.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+
+
+    // CS5356 TODO #3
+    // Create a new user using the Firebase SDK for Web
+    // Get the users ID token
+    // Start a new session with the users ID token
+    // Redirect the user to the /dashboard
+
+    app.auth().createUserWithEmailAndPassword(login, password)
+      .then((userCredential) => {
+        // Signed in 
+        var user = userCredential.user;
+        var uid = "user" + user.uid;
+        var email = user.email;
+
+        user.getIdToken().then((idToken) => {
+          fetch('/sessionLogin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ idToken, isSignUp: true, topics: userTopics })
+          }).then(() => {
+            localStorage.setItem('userDetails', user)
+            window.location.href = "/dashboard";
+          })
+        }).catch((error) => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          console.log(errorMessage);
+        });
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+      });
+
+    return false;
+
+  }
+
+  function postSignInData() {
+    const login = $(".signInForm #emailField").val();
+    const password = $(".signInForm #passwordField").val();
+    var userTopics = [];
+    const firebaseConfig = {
+      // CS5356 TODO #2
+      // Copy your Firebase config here too
+      apiKey: "AIzaSyD7iI_l0XTIhgiyQzaw5PADbdWFia7B9CY",
+      authDomain: "emptyvoid-47fab.firebaseapp.com",
+      projectId: "emptyvoid-47fab",
+      storageBucket: "emptyvoid-47fab.appspot.com",
+      messagingSenderId: "493812433604",
+      appId: "1:493812433604:web:fbfa8519284e8eef86bf91",
+      measurementId: "G-8TKK2V9JSY"
+    };
+
+    const app = firebase.initializeApp(firebaseConfig);
+
+    // CS5356 TODO #3
+    // Sign in using the Firebase SDK for Web
+    // Get the users ID token
+    // Start a new session with the users ID token
+
+    app.auth().signInWithEmailAndPassword(login, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        // ...
+        user.getIdToken().then((idToken) => {
+          fetch('/sessionLogin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ idToken, isSignUp: false })
+          }).then(() => {
+            localStorage.setItem('userDetails', userCredential)
+            window.location.href = '/dashboard'
+          })
+        })
+      })
+    return false;
+
+  }
+
+
+</script>
+
+<script>
+  const tagField = document.getElementById("tag-field");
+  const addTag = document.getElementById("add-tag");
+  const tagInput = document.getElementById("tag-input");
+
+  function createTag(message) {
+    const controlDiv = document.createElement("div");
+    controlDiv.classList.add("control");
+
+    const tags = document.createElement("div");
+    tags.classList.add("tags", "has-addons");
+
+    const tagContent = document.createElement("a");
+    tagContent.classList.add("tag", "is-link", "inputAddTopics");
+    tagContent.innerText = message;
+
+    const tagDelete = document.createElement("a");
+    tagDelete.classList.add("tag", "is-delete");
+    tagDelete.addEventListener("click", (event) => {
+      tagField.removeChild(controlDiv);
+    });
+
+    // finally nest all the tags together
+    tags.appendChild(tagContent);
+    tags.appendChild(tagDelete);
+    controlDiv.appendChild(tags);
+    tagField.appendChild(controlDiv);
+  }
+
+  addTag.addEventListener("click", () => {
+    if (tagInput.value !== "") {
+      createTag(tagInput.value);
+    }
+    tagInput.value = "";
+  });
+
+  tagInput.addEventListener("keyup", (event) => {
+    if ((event.keyCode === 13) && (tagInput.value !== "")) {
+      createTag(tagInput.value);
+      tagInput.value = "";
+    }
+
+  });
+
+</script>
+
+
+</html>

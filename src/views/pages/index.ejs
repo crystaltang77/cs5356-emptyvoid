@@ -1,29 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <!-- Bulma Version 0.9.0-->
-    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
-    <style type="text/css">
-        html,
-        body {
-            font-family: 'Open Sans';
-        }
-
-        img {
-            padding: 5px;
-            border: 1px solid #ccc;
-        }
-    </style>
-</head>
-
-<body>
+<%- include('../partials/head') %>
 <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-performance-compat.js"></script>
     <section class="hero is-fullheight is-default is-bold">
         <div class="hero-head">
@@ -68,65 +43,62 @@
                         </h2>
                         <br>
                         <p class="has-text-centered">
-                          <a class="button is-medium is-info is-outlined" href="/sign-up">Sign Up
-                          </a>
+                            <a class="button is-medium is-info is-outlined" href="/sign-up">Sign Up
+                            </a>
                         </p>
                     </div>
                 </div>
             </div>
         </div>
-      </div>
-      <section class="container">
-          <div class="columns features">
-              <div class="column is-4">
-                  <div class="card is-shady">
-                      <div class="card-image has-text-centered">
-                      </div>
-                      <div class="card-content">
-                          <div class="content">
-                              <h4>Post Your Thoughts</h4>
-                              <p>Throw it into the void for the world to see or to disappear forever.</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="column is-4">
-                  <div class="card is-shady">
-                      <div class="card-image has-text-centered">
-                      </div>
-                      <div class="card-content">
-                          <div class="content">
-                              <h4>See What's On Others' Minds</h4>
-                              <p>Use the public postings feed to see the sufferings of the Empty Void community.</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="column is-4">
-                  <div class="card is-shady">
-                      <div class="card-image has-text-centered">
-                      </div>
-                      <div class="card-content">
-                          <div class="content">
-                              <h4>Exclusive Community Access</h4>
-                              <p>Be part of the elite group of Empty Voiders. It's free and therapeutic!</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="intro column is-8 is-offset-2">
-
-        <div class="hero-foot">
-            <div class="container">
-                <div class="tabs is-centered">
-                    <ul>
-                    </ul>
+        </div>
+        <section class="container">
+            <div class="columns features">
+                <div class="column is-4">
+                    <div class="card is-shady">
+                        <div class="card-image has-text-centered">
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                <h4>Post Your Thoughts</h4>
+                                <p>Throw it into the void for the world to see or to disappear forever.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-4">
+                    <div class="card is-shady">
+                        <div class="card-image has-text-centered">
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                <h4>See What's On Others' Minds</h4>
+                                <p>Use the public postings feed to see the sufferings of the Empty Void community.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-4">
+                    <div class="card is-shady">
+                        <div class="card-image has-text-centered">
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                <h4>Exclusive Community Access</h4>
+                                <p>Be part of the elite group of Empty Voiders. It's free and therapeutic!</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <script src="../js/bulma.js"></script>
-</body>
+            <div class="intro column is-8 is-offset-2">
 
-</html>
+                <div class="hero-foot">
+                    <div class="container">
+                        <div class="tabs is-centered">
+                            <ul>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        </section>
+    <%- include('../partials/footer') %>

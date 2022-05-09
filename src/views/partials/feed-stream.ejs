@@ -5,16 +5,14 @@
       </div>
       <div class="card-content">
         <div class="media">
-          <!-- <div class="media-left"> -->
-            <!-- <figure class="image is-48x48"> -->
-              <!-- <img class="is-rounded" src="<%= feedItem.imageSource %>" alt="Placeholder image"> -->
-            <!-- </figure> -->
-          <!-- </div> -->
           <div class="media-content">
             <p class="title is-4">
             </p>
             <p class="subtitle is-6">
-              <%= feedItem.username %>
+              <a id="<%= feedItem.username %>" onclick='f1(this)' href="" name="<%= feedItem.topics %>"
+                class="openPopup">
+                <%= feedItem.username %>
+              </a>
             </p>
           </div>
         </div>
@@ -26,5 +24,42 @@
     </div>
 
   </article>
+  <div id="update-modal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title" id="userName">User Intrested topics</p>
+        <button class="delete update-modal-close" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        <p id="dynamicContent"></p>
+      </section>
+    </div>
+  </div>
+  <script>
+    $(".openPopup").click(function (e) {
+      e.preventDefault();
+    });
+    function f1(event) {
 
+      let userName = event.id;
+      let topics = event.name;
+      const userTopics = topics.split(",");
+      let topicWords = "";
+      let countV = 1;
+      if (userTopics?.length > 0) {
+        for (let i = 0; i < 3; i++) {
+          if (userTopics[i]) {
+            topicWords += countV + ". " + userTopics[i] + "<br>";
+            countV += 1;
+          }
+        }
+      }
+      $("#update-modal").addClass("is-active");
+      $("#dynamicContent").html(topicWords);
+      $("#userName").html(userName);
+
+    }
+
+  </script>
   <% }) %>

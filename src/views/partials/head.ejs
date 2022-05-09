@@ -1,10 +1,144 @@
+<!-- Common Header -->
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Sample Site</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- CS5356: Any global css styles can be defined here -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <!-- Bulma Version 0.9.0-->
+  <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+
+  </link>
+  <script type="text/javascript"
+  src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.9/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.9/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-performance-compat.js"></script>
+  <script>
+    const firebaseApp = firebase.initializeApp({
+      apiKey: "AIzaSyD7iI_l0XTIhgiyQzaw5PADbdWFia7B9CY",
+      authDomain: "emptyvoid-47fab.firebaseapp.com",
+      projectId: "emptyvoid-47fab",
+      storageBucket: "emptyvoid-47fab.appspot.com",
+      messagingSenderId: "493812433604",
+      appId: "1:493812433604:web:fbfa8519284e8eef86bf91",
+      measurementId: "G-8TKK2V9JSY"
+    });
+    const perf = firebase.performance();
+    const db = firebaseApp.firestore();
+    const auth = firebaseApp.auth();
+   
+  </script>
   <style>
+    html,
+    body {
+      font-family: 'Open Sans';
+    }
+
+    img {
+      padding: 5px;
+      border: 1px solid #ccc;
+    }
+
+
+    :root {
+      --brandColor: hsl(204, 86%, 53%);
+      --background: rgb(247, 247, 247);
+      --textDark: hsla(0, 0%, 0%, 0.66);
+      --textLight: hsla(0, 0%, 0%, 0.33);
+    }
+
+    body {
+      background: var(--background);
+      height: 100vh;
+      color: var(--textDark);
+    }
+
+    .field:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    .register {
+      margin-top: 10rem;
+      background: white;
+      border-radius: 10px;
+    }
+
+    .left,
+    .right {
+      padding: 4.5rem;
+    }
+
+    .left {
+      border-right: 5px solid var(--background);
+    }
+
+    .left .title {
+      font-weight: 800;
+      letter-spacing: -2px;
+    }
+
+    .left .colored {
+      color: var(--brandColor);
+      font-weight: 500;
+      margin-top: 1rem !important;
+      letter-spacing: -1px;
+    }
+
+    .left p {
+      color: var(--textLight);
+      font-size: 1.15rem;
+    }
+
+    .right .title {
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .right .description {
+      margin-top: 1rem;
+      margin-bottom: 1rem !important;
+      color: var(--textLight);
+      font-size: 1.15rem;
+    }
+
+    .right small {
+      color: var(--textLight);
+    }
+
+    input {
+      font-size: 1rem;
+    }
+
+    input:focus {
+      border-color: var(--brandColor) !important;
+      box-shadow: 0 0 0 1px var(--brandColor) !important;
+    }
+
+    .fab,
+    .fas {
+      color: var(--textLight);
+      margin-right: 1rem;
+    }
+
+    .center-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  min-height: max-content;
+  position: sticky;
+  
+}
 
   </style>
 </head>
+
+<body>

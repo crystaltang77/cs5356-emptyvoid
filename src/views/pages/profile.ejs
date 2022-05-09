@@ -1,115 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('../partials/head') %>
+<%- include('../partials/update-topics-modal') %>
 
-<head>
-  <%- include('../partials/head') %>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-  <!-- Bulma Version 0.9.0-->
-  <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" /> 
-  <style type="text/css">
-      html,
-      body {
-          font-family: 'Open Sans';
-      }
 
-      img {
-          padding: 5px;
-          border: 1px solid #ccc;
-      }
-  </style>
-</head>
-
-<style>
-.center-screen {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: left;
-  min-height: 50vh;
-}</style>
-
-<script src="https://www.gstatic.com/firebasejs/9.6.9/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.9/firebase-auth-compat.js"></script>
-<script>
-   const firebaseApp = firebase.initializeApp({ 
-      apiKey: "AIzaSyD7iI_l0XTIhgiyQzaw5PADbdWFia7B9CY",
-      authDomain: "emptyvoid-47fab.firebaseapp.com",
-      projectId: "emptyvoid-47fab",
-      storageBucket: "emptyvoid-47fab.appspot.com",
-      messagingSenderId: "493812433604",
-      appId: "1:493812433604:web:fbfa8519284e8eef86bf91",
-      measurementId: "G-8TKK2V9JSY"
-    });
-   const db = firebaseApp.firestore();
-   const auth = firebaseApp.auth();
-</script>
-
-<body>
   <section class="hero is-fullheight is-default is-bold">
     <div class="hero-head">
       <nav class="navbar">
-          <div class="container">
-              <div class="navbar-brand">
-                  <a class="navbar-item" href="../">
-                  </a>
-                  <span class="navbar-burger burger" data-target="navbarMenu">
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                  </span>
-              </div>
-              <div id="navbarMenu" class="navbar-menu">
-                  <div class="navbar-end">
-                      <div class="tabs is-right">
-                          <ul>
-                              <li><a href="/">Home</a></li>
-                              <li><a href="/dashboard">Rants</a></li>
-                              <li class="is-active"><a href="/profile" class="navbar-item">
-                                <%= user.email %>
-                                <i class="material-icons">person_outline</i>
-                              </a></li>
-                              <li><a href="sessionLogout">Sign Out</a></li>
-                          </ul>
-                      </div>
-                  </div>
-              </div>
+        <div class="container">
+          <div class="navbar-brand">
+            <a class="navbar-item" href="../">
+            </a>
+            <span class="navbar-burger burger" data-target="navbarMenu">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
           </div>
+          <div id="navbarMenu" class="navbar-menu">
+            <div class="navbar-end">
+              <div class="tabs is-right">
+                <ul>
+                  <li><a href="/">Home</a></li>
+                  <li class="is-active"><a href="/profile" class="navbar-item">
+                      <%= user.email %>
+                    </a></li>
+                  <li><a href="sessionLogout">Sign Out</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </nav>
-  </div>
-
-  <div class="container">
-    <div class="columns">
-    <div class="center-screen">
-      <div class="tile is-8 is-parent" id="center">
-        <div class="tile is-child pink post">
-          <p class="title is-2 name">Hello, <%= user.username %>!</p>
-          <hr class="hr" />
-          <div class="content has-text-grey description">
-            <p>
-              Use this page to keep track of the number of rants you've thrown into the void.
-              In case you forget your email, that is here too. Feeling better?
-              Keep adding your thoughts - the void is always open.
-            </p>
-            <p>
-              You currently have <%= user.numPosts %> posts in your Void.
-            </p>
-            <p>
-              <b>Email: </b>
-              <%= user.email %>
-            </p>
-          </div>
-      </div>
     </div>
-  </div>
 
-</body>
-
-<%- include('../partials/footer') %>
-
-</html>
+    <div class="container">
+      <div class="columns">
+        <div class="center-screen">
+          <div class="tile is-8 is-parent" id="center">
+            <div class="tile is-child pink post">
+              <p class="title is-2 name">Hello, <%= user.username %>!</p>
+              <hr class="hr" />
+              <div class="content has-text-grey description">
+                <p>
+                  Use this page to keep track of the number of rants you've thrown into the void.
+                  In case you forget your email, that is here too. Feeling better?
+                  Keep adding your thoughts - the void is always open.
+                </p>
+                <p id="profileNumPost" class="<%= user.numPosts %>">
+                  You currently have <%= user.numPosts %> posts in your Void.
+                </p>
+                <input type="hidden" name="" id="profileEmail" value="<%= user.email %>">
+                <input type="hidden" name="" id="profileTopics" value="<%= user.topics %>">
+                <input type="hidden" name="" id="profileUserName" value="<%= user.username %>">
+                <input type="hidden" name="" id="profilePost" value="<%= user.numPosts %>">
+                <p>
+                  Email:
+                  <b>
+                    <%= user.email %>
+                  </b>
+                </p>
+                <p>
+                  <b>
+                    Topics you like talking about the most: <%= user.topics %>
+                  </b>
+                </p>
+                <button class="button is-primary" id="updateTopicButton">Add Topics</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%- include('../partials/footer') %>

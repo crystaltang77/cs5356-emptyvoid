@@ -1,0 +1,35 @@
+<section class="hero is-fullheight is-default is-bold">
+    <div class="hero-head">
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="../">
+                    </a>
+                    <span class="navbar-burger burger" data-target="navbarMenu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </div>
+                <div id="navbarMenu" class="navbar-menu">
+                    <div class="navbar-end">
+                        <div class="tabs is-right">
+                            <ul>
+                                <li><a href="/">Home</a></li>
+                                <% if(user?.email){ %>
+                                    <li><a href="/profile" class="navbar-item">
+                                            <%= user.email %>
+                                        </a></li>
+                                        <li><a href="sessionLogout">Sign Out</a></li>
+                                    <% } else if(isSignUp) { %>
+                                        <li><a href="/sign-in">Sign In</a></li>
+                                        <% } else if(!isSignUp) { %>
+                                            <li><a href="/sign-in">Sign Up</a></li>
+                                            <% } %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>

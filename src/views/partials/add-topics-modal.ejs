@@ -1,0 +1,28 @@
+<div class="modal" id="addTopicModal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Add Favorite Topics</p>
+            <button class="delete" aria-label="close" data-bulma-modal="close"></button>
+        </header>
+        <section class="modal-card-body">
+            <div class="field has-addons">
+                <div class="control" style="width: -webkit-fill-available;">
+                    <input id="tag-input" name="topicArray" class="input" type="text" placeholder="Add new topic...">
+                </div>
+                <div class="control">
+                    <a id="add-tag" class="button is-link">
+                        Add
+                    </a>
+                </div>
+            </div>
+            <div id="tag-field" class="field is-grouped is-grouped-multiline"></div>
+        </section>
+
+        <footer class="modal-card-foot">
+
+            <button id="save-topics" class="button is-success">Save changes</button>
+            <button class="button" data-bulma-modal="close">Cancel</button>
+        </footer>
+    </div>
+</div>
